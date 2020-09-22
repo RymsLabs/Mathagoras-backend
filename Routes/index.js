@@ -1,9 +1,9 @@
-const { signup } = require("../Controller/studentController")
+const studentController = require("../Controller/student-controller")
 
 
 module.exports = (app) => {
 
-    app.post('/signup', signup);
+    app.post('/signup', studentController.signup);
     
     // For any other req.
     app.use((req, res) => {

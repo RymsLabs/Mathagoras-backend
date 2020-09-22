@@ -1,9 +1,10 @@
-module.exports = (sequelize, DataTypes) => {
+const { DataTypes } = require('sequelize');
+const sequelize = require('../util/connection');
 
-    const Student = sequelize.define('User', {
+const Student = sequelize.define('student', {
     // Model attributes are defined here
     student_id: {
-        type: Sequelize.DataTypes.STRING(10),
+        type: DataTypes.STRING(10),
         primaryKey: true,
         allowNull: false
     },
@@ -18,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(40),
         allowNull: false,
         unique: true,
-
+    
     },
     password: {
-        type: DataTypes.STRING(40),
+        type: DataTypes.STRING(),
         allowNull: false
     },
     dob: {
@@ -31,10 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false
     }
-    }, {});
+}, {});
 
-    // Student.associate = function(models) {
-    //   // associations can be defined here
-    // };
-    return Student;
-};
+Student.sync({ force: true });
+
+module.exports = Student;
