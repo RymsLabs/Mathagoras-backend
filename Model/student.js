@@ -34,6 +34,6 @@ const Student = sequelize.define('student', {
     }
 }, {});
 
-Student.sync({ force: true });
+Student.sync({ force: false });
 
 module.exports = Student;
