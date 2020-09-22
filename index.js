@@ -1,22 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const Sequelize = require('sequelize');
-
-// Backend Variables
-const SERVER_NAME = "Mathagoras";
-const SERVER_PORT = process.env.PORT || 3000;
-
-// Database Variables
-const DB_USERNAME = process.env.DB_USERNAME || 'root';
-const DB_PASSWORD = process.env.DB_PASSWORD || 'raghav2011';
-const DB_NAME = process.env.DB_NAME || 'mathagoras';
-const DB_HOST = process.env.DB_HOST || 'localhost';
-const DB_PORT = process.env.DB_PORT || 3306;
+const morgan = require('morgan');
 
 // Setup Database
-const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
-    host: DB_HOST,
-    port: DB_PORT,
-    dialect: 'mysql'    /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
+const sequelize = new Sequelize( process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: "mysql"    /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
+  }, {
+    logging: false
   });
 
 // Check if connection to db was established.
@@ -30,21 +23,14 @@ sequelize.authenticate()
 
 // Setup backend
 const app = express();
-const Op = Sequelize.Op;
 app.use(express.json());
+app.use(morgan('short'));
+
+// Setup routes
+require('./routes')(app);
 
 
-
-
-
-
-// For any other req.
-app.use((req, res) => {
-    res.status(404);
-    res.json({"error":"404"});
-});
-
-
-app.listen(SERVER_PORT, () => {
-    console.log(SERVER_NAME + " backend started listening on port: " + SERVER_PORT);
+// Start Server
+app.listen(process.env.SERVER_PORT, () => {
+    console.log(process.env.SERVER_NAME + " backend started listening on port: " + process.env.SERVER_PORT);
 });
