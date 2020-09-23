@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
-// const sequelize = require('./util/connection');
+const studentRoutes = require("./Routes/student-routes");
+
 
 // Setup backend
 const app = express();
@@ -9,7 +10,7 @@ app.use(express.json());
 app.use(morgan('short'));
 
 // Setup routes
-require('./routes')(app);
+app.use("/student",studentRoutes);
 
 
 // Start Server
