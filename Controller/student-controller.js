@@ -1,7 +1,8 @@
 const Student = require("../Model/student");
 const bcrypt = require('bcrypt');
+const validationResult = require("express-validator").validationResult;
 
-function signup(req, res) {
+const signup = async (req, res) => {
     const enrolment = req.body.student_id;
     const fname = req.body.fname;
     const lname = req.body.lname;
@@ -10,13 +11,15 @@ function signup(req, res) {
     const dob = req.body.dob;
 
     // If notNull parameters are null, return error.
-    if (!enrolment || !fname || !email || !password) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
         res.status(400);
         return res.json({
             'type': 'error',
-            'message': 'Incomplete parameters.'
+            'message': 'Incorrect parameters.'
         });
     }
+
 
 
     Student.findOne({
@@ -71,7 +74,14 @@ function signup(req, res) {
                     res.json({
                         'type': 'success',
                         'message': 'Student created successfully.',
-                        'data': stud
+                        'student': {
+                            student_id: stud.student_id,
+                            fname: stud.fname,
+                            lname: stud.lname,
+                            email: stud.email,
+                            dob: stud.dob,
+                            join_date: stud.join_date
+                        }
                     });
                 }).catch(err => {
                     console.log("Error occured while trying to create student. Error: " + err);
@@ -102,6 +112,9 @@ function signup(req, res) {
     });
 };
 
-module.exports = {
-    signup
-};
+const login = async (req, res) => {
+    res.json({"status":"TODO"});
+}
+
+exports.signup = signup;
+exports.login = login;
