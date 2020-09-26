@@ -12,7 +12,7 @@ router.post('/signup',
         check('password').isLength({min: 6}),
     ], studentController.signup);
 
-router.post('/login', passport.authenticate('student', { session: false }), studentController.login);
+router.get('/login', passport.authenticate('student', { session: false }), studentController.login);
 
 // For any other req.
 router.use((req, res) => {
