@@ -27,5 +27,5 @@ app.use("/student",studentRoutes);
 
 // Start Server
 app.listen(process.env.PORT, () => {
-    console.log(`\n${process.env.SERVER_NAME} backend started listening on port: ${process.env.SERVER_PORT}`);
+    console.log(`\n${process.env.SERVER_NAME} backend started listening on port: ${process.env.PORT}`)
 });
