@@ -9,8 +9,16 @@ const Course = require("./course");
 
 const CourseStudent = sequelize.define('course_student', {}, {});
 
-// TODO: Fix relation
+
 Student.hasMany(CourseStudent, {
+    foreignKey: {
+        name: 'student_id',
+        allowNull: false,
+        primaryKey: true
+    }
+});
+
+CourseStudent.belongsTo(Student, {
     foreignKey: {
         name: 'student_id',
         allowNull: false,
@@ -29,14 +37,6 @@ Course.hasMany(CourseStudent, {
 CourseStudent.belongsTo(Course, {
     foreignKey: {
         name: 'course_id',
-        allowNull: false,
-        primaryKey: true
-    }
-});
-
-CourseStudent.belongsTo(Student, {
-    foreignKey: {
-        name: 'student_id',
         allowNull: false,
         primaryKey: true
     }

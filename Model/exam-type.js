@@ -2,11 +2,11 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../util/connection');
 
 // Imported Models
-const Teacher = require("./teacher");
+const Exam = require("./exam");
 
-const Course = sequelize.define('course', {
+const ExamType = sequelize.define('exam_type', {
     // Model attributes are defined here
-    course_id: {
+    exam_type_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
@@ -17,7 +17,7 @@ const Course = sequelize.define('course', {
         allowNull: false
     },
     description: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1000),
         allowNull: false,
         unique: true,
     
@@ -26,22 +26,4 @@ const Course = sequelize.define('course', {
     underscored: true
 });
 
-Teacher.hasMany(Course, {
-    foreignKey: {
-        name: 'teacher_id',
-        allowNull: false,
-        primaryKey: true
-    }
-});
-
-Course.belongsTo(Teacher, {
-    foreignKey: {
-        name: 'teacher_id',
-        allowNull: false,
-        primaryKey: true
-    }
-});
-
-Course.sync({ force: false });
-
-module.exports = Course;
+exports.ExamType = ExamType;
