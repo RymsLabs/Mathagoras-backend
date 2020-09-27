@@ -1,23 +1,23 @@
 const { Router } = require("express");
 const {check} = require('express-validator');
-const studentController = require("../Controller/student-controller");
+const teacherController = require("../Controller/teacher-controller");
 const passport = require('passport');
 const router = Router();
 
 router.post('/signup',
     [
-        check('student_id').not().isEmpty(),
+        check('teacher_id').not().isEmpty(),
         check('fname').not().isEmpty(),
         check('email').normalizeEmail().isEmail(),
         check('password').isLength({min: 6}),
-    ], studentController.signup);
+    ], teacherController.signup);
 
-router.get('/login', passport.authenticate('student', { session: false }), studentController.login);
+router.get('/login', passport.authenticate('teacher', { session: false }), teacherController.login);
 
 // For any other req.
 router.use((req, res) => {
     res.status(404);
-    res.json({"type":"error","message":"Error 404 route not found"});
+    res.json({"type":"error","message":"Error 404 route not"});
 });
 
 module.exports = router;

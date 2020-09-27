@@ -11,6 +11,7 @@ const authController = require("./Controller/auth-controller");
 
 // Routes
 const studentRoutes = require("./Routes/student-routes");
+const teacherRoutes = require("./Routes/teacher-routes");
 
 // Setup backend
 const app = express();
@@ -19,10 +20,11 @@ app.use(morgan('short'));
 
 // Setup Authentication middleware
 passport.use('student', new BasicStrategy(authController.handleStudentAuth));
-// passport.use('teacher', new BasicStrategy(authController.handleTeacherAuth));
+passport.use('teacher', new BasicStrategy(authController.handleTeacherAuth));
 
 // Setup routes
 app.use("/student",studentRoutes);
+app.use("/teacher",teacherRoutes);
 
 
 // Start Server
