@@ -12,6 +12,8 @@ const authController = require("./Controller/auth-controller");
 // Routes
 const studentRoutes = require("./Routes/student-routes");
 const teacherRoutes = require("./Routes/teacher-routes");
+const courseRoutes = require("./Routes/course-routes");
+const courseStudentRoutes = require("./Routes/course-student-routes");
 
 // Setup backend
 const app = express();
