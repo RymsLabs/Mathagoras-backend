@@ -1,9 +1,11 @@
 const { Router } = require("express");
 const {check} = require('express-validator');
-// const courseController = require("../Controller/course-controller");
+const courseController = require("../Controller/course-controller");
 const passport = require('passport');
 const router = Router();
-const Course = require("../Model/course");
+
+
+router.get("/all", courseController.getAll);
 
 // For any other req.
 router.use((req, res) => {

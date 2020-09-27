@@ -21,20 +21,35 @@ const Course = sequelize.define('course', {
         allowNull: false,
         unique: true,
     
-    },
-    teacher_id: {
-        type: DataTypes.STRING(10),
-        allowNull: false,
-        primaryKey: true,
-        references: {
-            model: Teacher,
-            key: 'teacher_id'
-        }
     }
-}, {});
+    // teacher_id: {
+    //     type: DataTypes.STRING(10),
+    //     allowNull: false,
+    //     primaryKey: true,
+    //     references: {
+    //         model: Teacher,
+    //         key: 'teacher_id'
+    //     }
+    // }
+}, {
+    underscored: true
+});
 
-Teacher.hasMany(Course);
-Course.belongsTo(Teacher);
+Teacher.hasMany(Course, {
+    foreignKey: {
+        name: 'teacher_id',
+        allowNull: false,
+        primaryKey: true
+    }
+});
+
+Course.belongsTo(Teacher, {
+    foreignKey: {
+        name: 'teacher_id',
+        allowNull: false,
+        primaryKey: true
+    }
+});
 
 Course.sync({ force: false });
 

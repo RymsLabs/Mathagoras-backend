@@ -7,31 +7,40 @@ const Course = require("./course");
 
 // This Table is used to store all the courses that a student is enrolled in.
 
-const CourseStudent = sequelize.define('course_student', {
-    // Model attributes are defined here
-    course_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        references: {
-            model: Course,
-            key: 'course_id'
-        }
-    },
-    student_id: {
-        type: DataTypes.STRING(10),
-        allowNull: false,
-        primaryKey: true,
-        references: {
-            model: Student,
-            key: 'student_id'
-        }
-    }
-}, {});
+const CourseStudent = sequelize.define('course_student', {}, {});
 
 // TODO: Fix relation
-Student.hasMany(CourseStudent);
-CourseStudent.belongsTo(Student);
+Student.hasMany(CourseStudent, {
+    foreignKey: {
+        name: 'student_id',
+        allowNull: false,
+        primaryKey: true
+    }
+});
+
+Course.hasMany(CourseStudent, {
+    foreignKey: {
+        name: 'course_id',
+        allowNull: false,
+        primaryKey: true
+    }
+});
+
+CourseStudent.belongsTo(Course, {
+    foreignKey: {
+        name: 'course_id',
+        allowNull: false,
+        primaryKey: true
+    }
+});
+
+CourseStudent.belongsTo(Student, {
+    foreignKey: {
+        name: 'student_id',
+        allowNull: false,
+        primaryKey: true
+    }
+});
 
 CourseStudent.sync({ force: false });
 

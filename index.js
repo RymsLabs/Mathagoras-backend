@@ -27,6 +27,8 @@ passport.use('teacher', new BasicStrategy(authController.handleTeacherAuth));
 // Setup routes
 app.use("/student",studentRoutes);
 app.use("/teacher",teacherRoutes);
+app.use("/course",courseRoutes);
+app.use("/courseStudent",courseStudentRoutes);
 
 
 // Start Server
