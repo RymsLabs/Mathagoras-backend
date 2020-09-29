@@ -2,7 +2,6 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../util/connection');
 
 // Imported Models
-const Exam = require("./exam");
 
 const ExamType = sequelize.define('exam_type', {
     // Model attributes are defined here
@@ -26,4 +25,4 @@ const ExamType = sequelize.define('exam_type', {
     underscored: true
 });
 
-exports.ExamType = ExamType;
+module.exports = ExamType;
