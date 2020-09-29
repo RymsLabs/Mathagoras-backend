@@ -14,6 +14,7 @@ const studentRoutes = require("./Routes/student-routes");
 const teacherRoutes = require("./Routes/teacher-routes");
 const courseRoutes = require("./Routes/course-routes");
 const courseStudentRoutes = require("./Routes/course-student-routes");
+const examRoutes = require("./Routes/exam-routes");
 
 // Setup backend
 const app = express();
@@ -29,6 +30,7 @@ app.use("/student",studentRoutes);
 app.use("/teacher",teacherRoutes);
 app.use("/course",courseRoutes);
 app.use("/courseStudent",courseStudentRoutes);
+app.use("/exam",examRoutes);
 
 
 // Start Server

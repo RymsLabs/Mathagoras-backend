@@ -4,6 +4,9 @@ const teacherController = require("../Controller/teacher-controller");
 const passport = require('passport');
 const router = Router();
 
+
+router.get('/all', teacherController.getAll);
+
 router.post('/signup',
     [
         check('teacher_id').not().isEmpty(),
@@ -17,7 +20,7 @@ router.get('/login', passport.authenticate('teacher', { session: false }), teach
 // For any other req.
 router.use((req, res) => {
     res.status(404);
-    res.json({"type":"error","message":"Error 404 route not"});
+    res.json({"type":"error","message":"Error 404 route not found"});
 });
 
 module.exports = router;

@@ -2,6 +2,24 @@ const Teacher = require("../Model/teacher");
 const bcrypt = require('bcrypt');
 const validationResult = require("express-validator").validationResult;
 
+const getAll = async (req, res) => {
+    let teachers;
+    try {
+        teachers = await Teacher.findAll({
+            attributes: { exclude: ['password'] }
+        });
+    } catch (err) {
+        console.log("Error occurred while quering all Teachers: ");
+        console.log(err);
+        return res.json({"type":"error","message":"Error quering database","err":err});
+    }
+
+    return res.json({
+        "type":"success",
+        "teachers":teachers
+    })
+}
+
 const signup = async (req, res) => {
     const teacherId = req.body.teacher_id;
     const fname = req.body.fname;
@@ -119,3 +137,4 @@ const login = async (req, res) => {
 
 exports.signup = signup;
 exports.login = login;
+exports.getAll = getAll;
