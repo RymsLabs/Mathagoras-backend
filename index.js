@@ -5,6 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
+const cors = require('cors');
 
 // Custom Libraries
 const authController = require("./Controller/auth-controller");
@@ -21,6 +22,7 @@ const examRoutes = require("./Routes/exam-routes");
 const app = express();
 app.use(express.json());
 app.use(morgan('short'));
+app.use(cors);
 
 // Setup Authentication middleware
 passport.use('student', new BasicStrategy(authController.handleStudentAuth));
