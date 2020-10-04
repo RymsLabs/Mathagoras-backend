@@ -22,7 +22,7 @@ const examRoutes = require("./Routes/exam-routes");
 const app = express();
 app.use(express.json());
 app.use(morgan('short'));
-app.use(cors);
+app.use(cors());
 
 // Setup Authentication middleware
 passport.use('student', new BasicStrategy(authController.handleStudentAuth));
