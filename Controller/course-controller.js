@@ -1,4 +1,6 @@
 const Course = require('../Model/course');
+const {validationResult} = require("express-validator");
+
 
 const getAll = async (req, res) => {
     const courses = await Course.findAll();
@@ -17,7 +19,8 @@ const getById = async (req, res) => {
         res.status(500);
         res.json({
             "type": "error",
-            "message": "Error finding course."
+            "message": "Error finding course.",
+            "err": err
         });
     }
 
@@ -59,19 +62,28 @@ const getById = async (req, res) => {
 }
 
 const addCourse = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400);
+        return res.json({
+            'type': 'error',
+            'message': 'Incorrect parameters.'
+        });
+    }
     const {courseName, description} = req.body;
     let course;
     try {
         course = await Course.create({
             name: courseName,
             description: description,
-            teacher_id: req.username
+            teacher_id: req.user.teacher_id
         });
     } catch (err) {
         res.status(500);
         return res.json({
             "type": "error",
-            "message": "Error creating course."
+            "message": "Error creating course.",
+            "err": err
         });
     }
 
@@ -82,8 +94,16 @@ const addCourse = async (req, res) => {
 }
 
 const updateCourse = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400);
+        return res.json({
+            'type': 'error',
+            'message': 'Incorrect parameters.'
+        });
+    }
     const courseId = req.params.id;
-    const teacherId = req.username;
+    const teacherId = req.user.teacher_id;
     const {courseName, description} = req.body;
     let course;
     try {
@@ -117,15 +137,24 @@ const updateCourse = async (req, res) => {
 const deleteCourse = async (req, res) => {
     let course;
     try {
-        course = await Course.destroy({where: {course_id: req.params.id, teacher_id: req.username}});
+        course = await Course.destroy({where: {course_id: req.params.id, teacher_id: req.user.teacher_id}});
     } catch (err) {
         res.status(500);
         return res.json({
             "type": "error",
-            "message": "Error deleting course."
+            "message": "Error deleting course.",
+            "err": err
         });
     }
-    // TODO: Check if course is null or not.
+
+    if(!course) {
+        res.status(400);
+        return res.json({
+            "type":"error",
+            "message": "Course not enrolled."
+        });
+    }
+
     console.log(course);
     res.json({
         "type":"success",
