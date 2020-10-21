@@ -7,6 +7,16 @@ const router = Router();
 
 router.get("/all", courseController.getAll);
 
+router.get("/student/:id", passport.authenticate('student', { session: false }), courseController.getById);
+
+router.get("/teacher/:id", passport.authenticate('teacher', { session: false }), courseController.getById);
+
+router.post("/", passport.authenticate('teacher', { session: false }), courseController.addCourse);
+
+router.patch("/:id", passport.authenticate('teacher', { session: false }), courseController.updateCourse);
+
+router.delete("/:id", passport.authenticate('teacher', { session: false }), courseController.deleteCourse);
+
 // For any other req.
 router.use((req, res) => {
     res.status(404);
