@@ -17,7 +17,7 @@ router.get('/login', passport.authenticate('student', { session: false }), stude
 // For any other req.
 router.use((req, res) => {
     res.status(404);
-    res.json({"type":"error","message":"Error 404 route not found"});
+    res.json({"type":"error","message":"Route not exists"});
 });
 
 module.exports = router;

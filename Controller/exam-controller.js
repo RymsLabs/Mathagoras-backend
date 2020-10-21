@@ -8,6 +8,7 @@ const getAll = async (req, res) => {
     } catch (err) {
         console.log("Error occurred while quering all Exams: ");
         console.log(err);
+        res.status(500);
         return res.json({"type":"error","message":"Error quering database","err":err});
     }
     return res.json({
