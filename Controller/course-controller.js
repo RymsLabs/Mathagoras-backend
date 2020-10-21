@@ -115,8 +115,9 @@ const updateCourse = async (req, res) => {
 }
 
 const deleteCourse = async (req, res) => {
+    let course;
     try {
-        await Course.destroy({where: {course_id: req.params.id, teacher_id: req.username}});
+        course = await Course.destroy({where: {course_id: req.params.id, teacher_id: req.username}});
     } catch (err) {
         res.status(500);
         return res.json({
@@ -124,6 +125,8 @@ const deleteCourse = async (req, res) => {
             "message": "Error deleting course."
         });
     }
+    // TODO: Check if course is null or not.
+    console.log(course);
     res.json({
         "type":"success",
         "message": "Course deleted successfully."

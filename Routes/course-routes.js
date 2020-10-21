@@ -11,9 +11,9 @@ router.get("/student/:id", passport.authenticate('student', { session: false }),
 
 router.get("/teacher/:id", passport.authenticate('teacher', { session: false }), courseController.getById);
 
-router.post("/", passport.authenticate('teacher', { session: false }), courseController.addCourse);
+router.post("/", passport.authenticate('teacher', { session: false }), [check('courseName').notEmpty().isInt(), check('description').notEmpty()] , courseController.addCourse);
 
-router.patch("/:id", passport.authenticate('teacher', { session: false }), courseController.updateCourse);
+router.patch("/:id", passport.authenticate('teacher', { session: false }), [check('courseName').notEmpty().isInt(), check('description').notEmpty()] , courseController.updateCourse);
 
 router.delete("/:id", passport.authenticate('teacher', { session: false }), courseController.deleteCourse);
 
