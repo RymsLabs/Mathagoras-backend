@@ -128,10 +128,18 @@ const updateCourse = async (req, res) => {
         });
     }
 
-    res.json({
-        "type":"success",
-        "updatedCourse": course
-    });
+    // If course[0] == 1, it was updated, else it was not (Probably nothing new was specified)
+    if(course[0]) {
+        res.json({
+            "type":"success",
+            "message": "course updated successfully"
+        });
+    } else {
+        res.json({
+            "type":"success",
+            "message": "no change was specified!"
+        });
+    }
 }
 
 const deleteCourse = async (req, res) => {
@@ -151,7 +159,7 @@ const deleteCourse = async (req, res) => {
         res.status(400);
         return res.json({
             "type":"error",
-            "message": "Course not enrolled."
+            "message": "Course not found."
         });
     }
 

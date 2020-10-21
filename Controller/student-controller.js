@@ -2,7 +2,25 @@ const Student = require("../Model/student");
 const bcrypt = require('bcrypt');
 const validationResult = require("express-validator").validationResult;
 
-const signup = async (req, res) => {
+const getAll = async (req, res) => {
+    let students;
+    try {
+        students = await Student.findAll({
+            attributes: { exclude: ['password'] }
+        });
+    } catch (err) {
+        console.log("Error occurred while quering all Students: ");
+        console.log(err);
+        return res.json({"type":"error","message":"Error quering database","err":err});
+    }
+
+    return res.json({
+        "type":"success",
+        "students":students
+    });
+}
+
+const signup = (req, res) => {
     const enrolment = req.body.student_id;
     const fname = req.body.fname;
     const lname = req.body.lname;
@@ -112,9 +130,10 @@ const signup = async (req, res) => {
     });
 };
 
-const login = async (req, res) => {
+const login = (req, res) => {
     res.json({"status":"TODO"});
 }
 
+exports.getAll = getAll;
 exports.signup = signup;
 exports.login = login;

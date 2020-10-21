@@ -4,6 +4,8 @@ const studentController = require("../Controller/student-controller");
 const passport = require('passport');
 const router = Router();
 
+router.get('/all', studentController.getAll);
+
 router.post('/signup',
     [
         check('student_id').not().isEmpty(),

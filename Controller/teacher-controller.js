@@ -17,7 +17,7 @@ const getAll = async (req, res) => {
     return res.json({
         "type":"success",
         "teachers":teachers
-    })
+    });
 }
 
 const signup = async (req, res) => {
