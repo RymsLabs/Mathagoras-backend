@@ -32,6 +32,7 @@ const signup = async (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+        console.log(`Error in signup teacher: ${errors}`);
         res.status(400);
         return res.json({
             'type': 'error',
