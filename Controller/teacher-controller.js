@@ -133,7 +133,12 @@ const signup = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    res.json({"type":"success","message":"TODO"});
+    const teacher = req.user;
+    delete teacher.dataValues['password'];
+    res.json({
+        type:"success",
+        teacher
+    });
 }
 
 exports.signup = signup;

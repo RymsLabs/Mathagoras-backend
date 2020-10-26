@@ -131,7 +131,12 @@ const signup = (req, res) => {
 };
 
 const login = (req, res) => {
-    res.json({"status":"TODO"});
+    const student = req.user;
+    delete student.dataValues['password'];
+    res.json({
+        status: 'success',
+        student 
+    });
 }
 
 exports.getAll = getAll;
