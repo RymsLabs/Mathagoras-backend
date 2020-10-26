@@ -34,7 +34,6 @@ const getAll = async (req, res) => {
             
             return Object.assign({}, {
                 course_id: enrolled.course_id,
-                "course_id": 3,
                 "name": enrolled.name,
                 "description": enrolled.description,
                 "teacher_id": enrolled.teacher_id,
