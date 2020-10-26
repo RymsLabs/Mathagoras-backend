@@ -1,6 +1,7 @@
 const Course = require("../Model/course");
 const CourseStudent = require("../Model/course-student");
 const {validationResult} = require("express-validator");
+const Teacher = require("../Model/teacher");
 
 const getAll = async (req, res) => {
     let enrolledCourses;
@@ -12,6 +13,35 @@ const getAll = async (req, res) => {
               where: { student_id: req.user.student_id }
             }
           });
+
+        enrolledCourses = enrolledCourses.map(async enrolled => {
+            let Tname, teacher;
+            try {
+                teacher = await Teacher.findOne({where: {teacher_id: enrolled.teacher_id}});
+            } catch (err) {
+                res.status(500);
+                return res.json({
+                    "type":"error",
+                    "message":"Error quering Teachers",
+                    "err":err
+                });
+            }
+            if (teacher.lname) {
+                Tname = `${teacher.fname} ${teacher.lname}`;
+            } else {
+                Tname = teacher.fname;
+            }
+            
+            return Object.assign({}, {
+                course_id: enrolled.course_id,
+                "course_id": 3,
+                "name": enrolled.name,
+                "description": enrolled.description,
+                "teacher_id": enrolled.teacher_id,
+                "teacher_name": Tname,
+            });
+          });
+          
     } catch (err) {
         console.log("Error occurred while quering all enrolled Courses: ");
         console.log(err);
@@ -22,10 +52,15 @@ const getAll = async (req, res) => {
             "err":err
         });
     }
-    return res.json({
-        "type": "success",
-        "enrolled": enrolledCourses
-    });
+
+    Promise.all(enrolledCourses).then(result => {
+        return res.json({
+            "type": "success",
+            "enrolled": result
+        });
+    })
+
+    
 }
 
 const enroll = async (req, res) => {
