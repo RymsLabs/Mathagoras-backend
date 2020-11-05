@@ -19,7 +19,7 @@ const getClasses = async (req, res) => {
         });
     }
 
-    const course = req.body.course_id;
+    const course = req.body.courseId;
     const classes = await Class.findAll({
         course_id: course
     });
@@ -118,7 +118,7 @@ const deleteClass = async (req, res) => {
     const { classId, courseId, startTime, endTime, from, till } = req.body;
     let deletedClass;
     try {
-        deletedClass = await Course.destroy({where:{course_id: courseId, class_id: classId});
+        deletedClass = await Course.destroy({where:{course_id: courseId, class_id: classId}});
     } catch (err) {
         res.status(500);
         return res.json({

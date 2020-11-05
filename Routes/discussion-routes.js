@@ -6,7 +6,9 @@ const router = Router();
 
 router.get("/all", discussionController.getAll);
 
-// router.post("/", passport.authenticate('teacher', { session: false }), [check('courseName').notEmpty(), check('description').notEmpty()] , discussionController.addDiscussion);
+router.get("/", discussionController.getDiscussions);
+
+router.post("/", passport.authenticate('teacher', { session: false }), [check('courseName').notEmpty(), check('description').notEmpty()] , discussionController.addDiscussion);
 
 // router.patch("/:id", passport.authenticate('teacher', { session: false }), [check('courseName').notEmpty(), check('description').notEmpty()] , discussionController.updateDiscussion);
 
