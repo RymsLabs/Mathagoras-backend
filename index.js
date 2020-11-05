@@ -15,7 +15,8 @@ const studentRoutes = require("./Routes/student-routes");
 const teacherRoutes = require("./Routes/teacher-routes");
 const courseRoutes = require("./Routes/course-routes");
 const courseStudentRoutes = require("./Routes/course-student-routes");
-const classRoutes = require("./Routes/class-routes")
+const classRoutes = require("./Routes/class-routes");
+const discussionRoutes = require("./Routes/discussion-routes")
 const examTypeRoutes = require("./Routes/exam-type-routes");
 const examRoutes = require("./Routes/exam-routes");
 
@@ -35,6 +36,7 @@ app.use("/teacher",teacherRoutes);
 app.use("/course",courseRoutes);
 app.use("/courseStudent",courseStudentRoutes);
 app.use("/class",classRoutes);
+app.use("/discussion", discussionRoutes);
 app.use("/examType",examTypeRoutes);
 app.use("/exam",examRoutes);
 
