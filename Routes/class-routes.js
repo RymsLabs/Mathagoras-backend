@@ -6,11 +6,25 @@ const router = Router();
 
 router.get("/all", classController.getAll);
 
-// router.post("/", passport.authenticate('teacher', { session: false }), [check('courseName').notEmpty(), check('description').notEmpty()] , classController.addClass);
+router.get("/", [check('courseId').notEmpty()], classController.getClasses);
 
-// router.patch("/:id", passport.authenticate('teacher', { session: false }), [check('courseName').notEmpty(), check('description').notEmpty()] , classController.updateClass);
+router.post("/", passport.authenticate('teacher', { session: false }), [
+    check('courseId').notEmpty(), 
+    check('startTime').notEmpty(),
+    check('endTime').notEmpty(),
+    check('from').notEmpty(),
+    check('till').notEmpty()
+], classController.addClass);
 
-// router.delete("/:id", passport.authenticate('teacher', { session: false }), classController.deleteClass);
+router.patch("/:id", passport.authenticate('teacher', { session: false }), [
+    check('courseId').notEmpty(),
+    check('startTime').notEmpty(),
+    check('endTime').notEmpty(),
+    check('from').notEmpty(),
+    check('till').notEmpty()
+], classController.updateClass);
+
+router.delete("/:id", passport.authenticate('teacher', { session: false }), classController.deleteClass);
 
 // For any other req.
 router.use((req, res) => {
