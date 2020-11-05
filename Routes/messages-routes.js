@@ -6,7 +6,8 @@ const router = Router();
 
 router.get("/all", messagesController.getAll);
 
-// router.post("/", passport.authenticate('teacher', { session: false }), [check('courseName').notEmpty(), check('description').notEmpty()] , messagesController.addMessage);
+router.post("/student/", passport.authenticate('student', { session: false }), [check('discussionId').notEmpty(), check('message').notEmpty()] , messagesController.addMessage);
+router.post("/teacher/", passport.authenticate('teacher', { session: false }), [check('discussionId').notEmpty(), check('message').notEmpty()] , messagesController.addMessage);
 
 // For any other req.
 router.use((req, res) => {
