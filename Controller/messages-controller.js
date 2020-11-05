@@ -31,9 +31,9 @@ const addMessage = async (req, res) => {
         userType = "teacher";
     }
 
-    let message;
+    let discussionMessage;
     try {
-        message = await DiscussionMessages.create({
+        discussionMessage = await DiscussionMessages.create({
             discussion_id: discussionId,
             user_id: userId,
             user_type: userType,
@@ -52,7 +52,7 @@ const addMessage = async (req, res) => {
 
     res.json({
         "type":"success",
-        "class": message
+        "message": discussionMessage
     });
 }
 
