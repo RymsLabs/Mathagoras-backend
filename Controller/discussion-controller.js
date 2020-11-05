@@ -1,7 +1,7 @@
 const Discussion = require('../Model/discussion');
 const {validationResult} = require("express-validator");
 
-const getAll = (req, res) => {
+const getAll = async (req, res) => {
     const discussions = await Discussion.findAll();
     res.json({
         "type": "success",
