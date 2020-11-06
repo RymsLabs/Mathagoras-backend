@@ -6,6 +6,8 @@ const router = Router();
 
 router.get("/all", courseController.getAll);
 
+router.get('/teacher/all', passport.authenticate('teacher', { session: false }), courseController.getTeacher);
+
 router.get("/student/:id", passport.authenticate('student', { session: false }), courseController.getById);
 
 router.get("/teacher/:id", passport.authenticate('teacher', { session: false }), courseController.getById);

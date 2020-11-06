@@ -61,6 +61,36 @@ const getById = async (req, res) => {
 
 }
 
+const getTeacher = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400);
+        return res.json({
+            'type': 'error',
+            'message': 'Incorrect parameters.'
+        });
+    }
+    let courses;
+    try {
+        courses = await Course.findAll({ where: {
+            teacher_id: req.user.teacher_id,
+        } });
+
+    } catch (err) {
+        res.status(500);
+        return res.json({
+            "type": "error",
+            "message": "Error fetching courses.",
+            "err": err
+        });
+    }
+
+    res.json({
+        "type":"success",
+        "courses": courses
+    });
+}
+
 const addCourse = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -175,3 +205,4 @@ exports.getById = getById;
 exports.addCourse = addCourse;
 exports.updateCourse = updateCourse;
 exports.deleteCourse = deleteCourse;
+exports.getTeacher = getTeacher;
