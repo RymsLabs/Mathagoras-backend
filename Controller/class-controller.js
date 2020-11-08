@@ -10,7 +10,7 @@ const getAll = async (req, res) => {
 }
 
 const getClasses = async (req, res) => {
-    const course = req.params.courseId;
+    const course = req.params.id;
     const classes = await Class.findAll({where:
         {course_id: course}
     });
