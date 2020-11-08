@@ -11,8 +11,8 @@ const getAll = async (req, res) => {
 
 const getClasses = async (req, res) => {
     const course = req.params.courseId;
-    const classes = await Class.findAll({
-        course_id: course
+    const classes = await Class.findAll({where:
+        {course_id: course}
     });
     res.json({
         "type": "success",
