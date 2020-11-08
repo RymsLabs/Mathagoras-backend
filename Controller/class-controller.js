@@ -10,16 +10,7 @@ const getAll = async (req, res) => {
 }
 
 const getClasses = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        res.status(400);
-        return res.json({
-            'type': 'error',
-            'message': 'Incorrect parameters.'
-        });
-    }
-
-    const course = req.body.courseId;
+    const course = req.params.courseId;
     const classes = await Class.findAll({
         course_id: course
     });
