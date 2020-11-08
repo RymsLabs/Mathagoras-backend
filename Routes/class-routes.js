@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/all", classController.getAll);
 
-router.get("/:id", [check('courseId').notEmpty()], classController.getClasses);
+router.get("/:id", classController.getClasses);
 
 router.post("/", passport.authenticate('teacher', { session: false }), [
     check('courseId').notEmpty(), 
