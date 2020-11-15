@@ -21,7 +21,9 @@ const getDiscussions = async (req, res) => {
 
     const { classId } = req.params;
     const discussions = await Class.findAll({
-        class_id: classId,
+        where: {
+            class_id: classId,
+        }
     });
     res.json({
         "type": "success",

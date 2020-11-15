@@ -3,7 +3,11 @@ const {validationResult} = require("express-validator");
 
 const getAll = async (req, res) => {
     const { discussionId } = req.params;
-    const messages = await DiscussionMessages.findAll();
+    const messages = await DiscussionMessages.findAll({
+        where: {
+            discussion_id: discussionId,
+        }
+    });
     res.json({
         "type": "success",
         "messages": messages
