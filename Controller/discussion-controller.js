@@ -10,19 +10,21 @@ const getAll = async (req, res) => {
 }
 
 const getDiscussions = async (req, res) => {
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //     res.status(400);
-    //     return res.json({
-    //         'type': 'error',
-    //         'message': 'Incorrect parameters.'
-    //     });
-    // }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400);
+        return res.json({
+            'type': 'error',
+            'message': 'Incorrect parameters.'
+        });
+    }
 
     const { classId } = req.params;
+    const { classDate } = req.body;
     const discussions = await Class.findAll({
         where: {
             class_id: classId,
+            discussion_date: new Date(classDate),
         }
     });
     res.json({
