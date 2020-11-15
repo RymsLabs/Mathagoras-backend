@@ -21,7 +21,7 @@ const getDiscussions = async (req, res) => {
 
     const { classId } = req.params;
     const { classDate } = req.body;
-    const discussions = await Class.findAll({
+    const discussions = await Discussion.findAll({
         where: {
             class_id: classId,
             discussion_date: new Date(classDate),
