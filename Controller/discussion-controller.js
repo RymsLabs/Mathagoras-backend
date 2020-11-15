@@ -10,16 +10,16 @@ const getAll = async (req, res) => {
 }
 
 const getDiscussions = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        res.status(400);
-        return res.json({
-            'type': 'error',
-            'message': 'Incorrect parameters.'
-        });
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     res.status(400);
+    //     return res.json({
+    //         'type': 'error',
+    //         'message': 'Incorrect parameters.'
+    //     });
+    // }
 
-    const { classId } = req.body;
+    const { classId } = req.params;
     const discussions = await Class.findAll({
         class_id: classId,
     });

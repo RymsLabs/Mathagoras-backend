@@ -2,6 +2,7 @@ const DiscussionMessages = require('../Model/discussion-messages');
 const {validationResult} = require("express-validator");
 
 const getAll = async (req, res) => {
+    const { discussionId } = req.params;
     const messages = await DiscussionMessages.findAll();
     res.json({
         "type": "success",

@@ -4,7 +4,7 @@ const messagesController = require("../Controller/messages-controller");
 const passport = require('passport');
 const router = Router();
 
-router.get("/all", messagesController.getAll);
+router.get("/:discussionId", messagesController.getAll);
 
 router.post("/student/", passport.authenticate('student', { session: false }), [check('discussionId').notEmpty(), check('message').notEmpty()] , messagesController.addMessage);
 router.post("/teacher/", passport.authenticate('teacher', { session: false }), [check('discussionId').notEmpty(), check('message').notEmpty()] , messagesController.addMessage);

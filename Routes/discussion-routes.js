@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/all", discussionController.getAll);
 
-router.get("/", [check('classId').notEmpty()], discussionController.getDiscussions);
+router.get("/:classId", discussionController.getDiscussions);
 
 router.post("/", passport.authenticate('teacher', { session: false }), [check('classId').notEmpty(), check('title').notEmpty()] , discussionController.addDiscussion);
 
