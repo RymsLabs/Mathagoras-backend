@@ -41,13 +41,13 @@ const addDiscussion = async (req,res) => {
         });
     }
 
-    const { courseId, title } = req.body;
+    const { courseId, title, classDate } = req.body;
     let createdDiscussion;
     try {
         createdDiscussion = await Discussion.create({
             course_id: courseId,
             title: title,
-            discussion_date: new Date(),
+            discussion_date: new Date(classDate),
         });
     } catch (err) {
         res.status(500);
