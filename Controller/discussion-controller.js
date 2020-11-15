@@ -41,11 +41,11 @@ const addDiscussion = async (req,res) => {
         });
     }
 
-    const { courseId, title, classDate } = req.body;
+    const { classId, title, classDate } = req.body;
     let createdDiscussion;
     try {
         createdDiscussion = await Discussion.create({
-            course_id: courseId,
+            class_id: classId,
             title: title,
             discussion_date: new Date(classDate),
         });
