@@ -35,7 +35,7 @@ const getAll = async (req, res) => {
         } else {
             let Tname, teacher;
             try {
-                teacher = await Teacher.findOne({where: {teacher_id: message.user_idtoLowerCase()}});
+                teacher = await Teacher.findOne({where: {teacher_id: message.user_id.toLowerCase()}});
             } catch (err) {
                 res.status(500);
                 return res.json({
