@@ -29,9 +29,8 @@ const getAll = async (req, res) => {
                 Sname = student.fname;
             }
 
-            return Object.defineProperty(message, {
-                username: Sname
-            });
+            message.username = Sname;
+            return message;
         } else {
             let Tname, teacher;
             try {
@@ -50,9 +49,8 @@ const getAll = async (req, res) => {
                 Tname = teacher.fname;
             }
 
-            return Object.defineProperty(message, {
-                username: Tname
-            });
+            message.username = Tname;
+            return message;
         }
     });
     res.json({
