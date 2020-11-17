@@ -57,7 +57,7 @@ const getAll = async (req, res) => {
             "type": "success",
             "enrolled": result
         });
-    })
+    });
 
     
 }

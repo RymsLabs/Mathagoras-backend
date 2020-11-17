@@ -54,9 +54,12 @@ const getAll = async (req, res) => {
             return temp;
         }
     });
-    res.json({
-        "type": "success",
-        "messages": messages
+
+    Promise.all(messages).then(result => {
+        return res.json({
+            "type": "success",
+            "messages": messages
+        });
     });
 }
 
