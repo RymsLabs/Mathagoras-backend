@@ -14,7 +14,7 @@ const getAll = async (req, res) => {
         if(message.user_type == 'student') {
             let Sname, student;
             try {
-                student = await Student.findOne({where: {student_id: message.user_id}});
+                student = await Student.findOne({where: {student_id: message.user_id.toLowerCase()}});
             } catch (err) {
                 res.status(500);
                 return res.json({
@@ -35,7 +35,7 @@ const getAll = async (req, res) => {
         } else {
             let Tname, teacher;
             try {
-                teacher = await Teacher.findOne({where: {teacher_id: message.user_id}});
+                teacher = await Teacher.findOne({where: {teacher_id: message.user_idtoLowerCase()}});
             } catch (err) {
                 res.status(500);
                 return res.json({
