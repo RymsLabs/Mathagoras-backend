@@ -51,7 +51,7 @@ const getAll = async (req, res) => {
             }
 
             return Object.assign(message, {
-                username: Sname
+                username: Tname
             });
         }
     });
