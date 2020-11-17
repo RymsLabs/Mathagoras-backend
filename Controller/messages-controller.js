@@ -5,7 +5,7 @@ const Teacher = require('../Model/teacher');
 
 const getAll = async (req, res) => {
     const { discussionId } = req.params;
-    const messages = await DiscussionMessages.findAll({
+    let messages = await DiscussionMessages.findAll({
         where: {
             discussion_id: discussionId,
         }
