@@ -48,21 +48,6 @@ ExamResult.belongsTo(Student, {
     }
 });
 
-Course.hasMany(ExamResult, {
-    foreignKey: {
-        name: 'course_id',
-        allowNull: false,
-        primaryKey: true
-    }
-});
+ExamResult.sync({ force: false });
 
-ExamResult.belongsTo(Course, {
-    foreignKey: {
-        name: 'course_id',
-        allowNull: false,
-        primaryKey: true
-    }
-});
-
-
-exports.Exam = ExamResult;
+module.exports = ExamResult;

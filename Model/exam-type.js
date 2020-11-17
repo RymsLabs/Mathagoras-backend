@@ -16,7 +16,7 @@ const ExamType = sequelize.define('exam_type', {
         allowNull: false
     },
     description: {
-        type: DataTypes.STRING(1000),
+        type: DataTypes.STRING(100),
         allowNull: false,
         unique: true,
     
@@ -24,5 +24,7 @@ const ExamType = sequelize.define('exam_type', {
 }, {
     underscored: true
 });
+
+ExamType.sync({ force: false });
 
 module.exports = ExamType;

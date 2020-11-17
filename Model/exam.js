@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../util/connection');
+const Class = require('./class');
 
 // Imported Models
 const ExamType = require("./exam-type");
@@ -44,5 +45,22 @@ Exam.belongsTo(ExamType, {
     }
 });
 
+Class.hasMany(Exam, {
+    foreignKey: {
+        name: 'class_id',
+        allowNull: false,
+        primaryKey: true
+    }
+});
 
-exports.Exam = Exam;
+Exam.belongsTo(Class, {
+    foreignKey: {
+        name: 'class_id',
+        allowNull: false,
+        primaryKey: true
+    }
+});
+
+Exam.sync({ force: false });
+
+module.exports = Exam;
