@@ -29,8 +29,8 @@ const getAll = async (req, res) => {
                 Sname = student.fname;
             }
 
-            return Object.defineProperty(message, {
-                username: Sname,
+            return Object.assign(message, {
+                username: Sname
             });
         } else {
             let Tname, teacher;
@@ -50,8 +50,8 @@ const getAll = async (req, res) => {
                 Tname = teacher.fname;
             }
 
-            return Object.defineProperty(message, {
-                username: Tname,
+            return Object.assign(message, {
+                username: Sname
             });
         }
     });
