@@ -11,7 +11,6 @@ const getAll = async (req, res) => {
         }
     });
     messages = messages.map(async (message) => {
-        let temp = message;
         if(message.user_type == 'student') {
             let Sname, student;
             try {
@@ -30,8 +29,9 @@ const getAll = async (req, res) => {
                 Sname = student.fname;
             }
 
-            temp.username = Sname;
-            return temp;
+            return Object.defineProperty(message, {
+                username: Sname,
+            });
         } else {
             let Tname, teacher;
             try {
@@ -50,8 +50,9 @@ const getAll = async (req, res) => {
                 Tname = teacher.fname;
             }
 
-            temp.username = Tname;
-            return temp;
+            return Object.defineProperty(message, {
+                username: Tname,
+            });
         }
     });
 
