@@ -8,7 +8,8 @@ const getAll = async (req, res) => {
     let messages = await DiscussionMessages.findAll({
         where: {
             discussion_id: discussionId,
-        }
+        },
+        raw: true,
     });
     messages = messages.map(async (message) => {
         if(message.user_type == 'student') {
@@ -28,7 +29,6 @@ const getAll = async (req, res) => {
             } else {
                 Sname = student.fname;
             }
-
             return Object.assign(message, {
                 username: Sname
             });
