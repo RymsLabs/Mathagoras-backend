@@ -52,6 +52,7 @@ const addPost = async (req,res) => {
             post_date: new Date(classDate),
         });
     } catch (err) {
+        console.log(err);
         res.status(500);
         return res.json({
             "type": "error",
